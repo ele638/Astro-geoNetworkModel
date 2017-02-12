@@ -10,7 +10,7 @@ TopoCoord::TopoCoord(QWidget *parent) :
     ui->setupUi(this);
     QTabWidget *tabWidget = new QTabWidget(parent);
     ui->verticalLayout->addWidget(tabWidget);
-    for(int i=0; i<start_points_calc.size(); i++){
+    for(int i=0; i < (int) start_points_calc.size(); i++){
         QWidget *tab = new QWidget(tabWidget);
         QVBoxLayout *tabLayout = new QVBoxLayout(tab);
         QScrollArea *area = new QScrollArea(tab);
@@ -43,12 +43,12 @@ TopoCoord::TopoCoord(QWidget *parent) :
         QTableWidget *horRectCoordTable = new QTableWidget();
         horRectCoordTable->setRowCount(4);
         int column_count=0;
-        for(int j=0; j< start_points_calc.size();j++) {
+        for(int j=0; j < (int) start_points_calc.size();j++) {
             if(link_map(i,j) == 1) column_count++;
         }
         horRectCoordTable->setColumnCount(column_count);
         QStringList *header = new QStringList();
-        for(int j=0, k=0; j<start_points_calc.size(); j++){
+        for(int j=0, k=0; j < (int) start_points_calc.size(); j++){
             if(link_map(i,j) == 1){
                 header->push_back(QString::number(j+1));
                 horRectCoordTable->setItem(0,k,new QTableWidgetItem(QString::number(current_point.xp.at(j))));
@@ -74,7 +74,7 @@ TopoCoord::TopoCoord(QWidget *parent) :
         horSpereCoordTable->setRowCount(9);
         horSpereCoordTable->setColumnCount(column_count*3);
         QStringList *header2 = new QStringList();
-        for(int j=0, k=0; j<start_points_calc.size(); j++){
+        for(int j=0, k=0; j < (int) start_points_calc.size(); j++){
             if(link_map(i,j) == 1){
                 header2->push_back(QString::number(j+1));
                 header2->push_back("");

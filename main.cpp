@@ -289,7 +289,7 @@ void matrixB_calc(){
     int k=0, filled1=0, filled2=0;
     std::vector<double> errorsA, errorsZ, errorsS, errors;
     // Проходим по всем загрубленным пунктам
-    for(int m=0; m<start_points_zagr.size(); m++){
+    for(int m=0; m < (int) start_points_zagr.size(); m++){
        // Ловим текущие пункты в цикле (загрубленные и вычисленные значения)
        Start_Point current_point = start_points_zagr.at(m), current_point_calc = start_points_calc.at(m);
        // Идем по всем точкам данного пункта
@@ -375,7 +375,6 @@ void matrixB_calc(){
     deltaX.setZero(matrixNormal.rows(), matrixNormal.cols());
 
     deltaX = (matrixB.transpose()*matrixB).inverse();
-    double det = deltaX.determinant();
     vectorW = VectorXd::Map(errors.data(), errors.size());
     deltax = VectorXd(-deltaX*matrixB.transpose()*vectorW);
     vectorV = VectorXd(matrixB*deltax + vectorW);

@@ -21,7 +21,7 @@ PointWidget::PointWidget(QWidget *parent) :
     radiansTable->setHorizontalHeaderLabels(QString("B,L,H,X,Y,Z").split(","));
     radiansTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     radiansTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    for(int i=0; i<dots.size(); i++){
+    for(int i=0; i < (int) dots.size(); i++){
         Dot dot = dots.at(i);
         coordTable->setItem(i, 0, new QTableWidgetItem(QString::number(dot.values.at(0),'f',0)));
         coordTable->setItem(i, 1, new QTableWidgetItem(QString::number(dot.values.at(1),'f',0)));

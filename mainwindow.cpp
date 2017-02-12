@@ -25,14 +25,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionMatrixNormUrPopr->setEnabled(false);
     ui->mapSelectButton->setEnabled(false);
     ui->calculateButton->setEnabled(false);
-    //DEBUG Тестовое автозаполнение
+    /* //DEBUG Тестовое автозаполнение
     ui->AEditText->appendPlainText(QString::number(6378137, 'f', 0));
     ui->AlphaEditText->appendPlainText(QString::number(298.2578, 'f', 4));
     ui->REditText->appendPlainText(QString::number(206265));
     ui->m_AEditText->appendPlainText(QString::number(0.05));
     ui->m_ZEditText->appendPlainText(QString::number(0.05));
     ui->m_SEditText->appendPlainText(QString::number(0.05));
-    //DEBUG
+    //DEBUG */
 }
 
 MainWindow::~MainWindow()
@@ -48,26 +48,28 @@ void MainWindow::on_fileSelectButton_clicked()
         QMessageBox msgBox;
         msgBox.setText("Не заполнены обязательные поля");
         msgBox.exec();
-    }
-    // Получаем путь до файла с координатами
-    dots_filename = QFileDialog::getOpenFileName(this,
-        tr("Open File"), "~/", tr("Dots Files (*.txt)"));
-    if(!dots_filename.isEmpty()){
-        // Читаем поля А и Альфы
-        CONST_A = ui->AEditText->toPlainText().toDouble();
-        CONST_ALPHA = 1/ui->AlphaEditText->toPlainText().toDouble();
-        // Запускаем чтение
-        read_dots();
-        // Обновляем блокировку кнопок
-        statusBar()->showMessage(dots_filename);
-        ui->statusLabel->setText("Координаты загружены");
-        ui->actionPoints->setEnabled(true);
-        ui->mapSelectButton->setEnabled(true);
-        // Заполняем поле количества точек
-        ui->NEditText->appendPlainText(QString::number(CONST_SIZE));
-        // Выводим окно с исходными данными
-        //PointWidget *pw = new PointWidget();
-        //pw->show();
+    }else{
+        // Получаем путь до файла с координатами
+        dots_filename = QFileDialog::getOpenFileName(this,
+            tr("Open File"), "~/", tr("Dots Files (*.txt)"));
+        if(!dots_filename.isEmpty()){
+            // Читаем поля А и Альфы
+            CONST_A = ui->AEditText->toPlainText().toDouble();
+            CONST_ALPHA = 1/ui->AlphaEditText->toPlainText().toDouble();
+            // Запускаем чтение
+            read_dots();
+            // Обновляем блокировку кнопок
+            statusBar()->showMessage(dots_filename);
+            ui->statusLabel->setText("Координаты загружены");
+            ui->actionPoints->setEnabled(true);
+            ui->mapSelectButton->setEnabled(true);
+            // Заполняем поле количества точек
+            ui->NEditText->clear();
+            ui->NEditText->appendPlainText(QString::number(CONST_SIZE));
+            // Выводим окно с исходными данными
+            PointWidget *pw = new PointWidget();
+            pw->show();
+        }
     }
 }
 
