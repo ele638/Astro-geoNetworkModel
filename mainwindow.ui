@@ -36,7 +36,8 @@
        <item row="2" column="0">
         <widget class="QLabel" name="AlphaLabel">
          <property name="text">
-          <string>Сжатие эллипсоида (1/alpha):</string>
+          <string>Сжатие эллипсоида
+ (1/alpha):</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -193,7 +194,7 @@
      <x>0</x>
      <y>0</y>
      <width>734</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -213,6 +214,8 @@
     <addaction name="actionMatrixNormUrPopr"/>
     <addaction name="actionKorellMatrixOfVector"/>
     <addaction name="actionVectParam"/>
+    <addaction name="separator"/>
+    <addaction name="actionOutAll"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuOutput"/>
@@ -251,6 +254,11 @@
   <action name="actionVectParam">
    <property name="text">
     <string>Вектор необходимых параметров</string>
+   </property>
+  </action>
+  <action name="actionOutAll">
+   <property name="text">
+    <string>Вывести все матрицы и вектора в файлы</string>
    </property>
   </action>
  </widget>

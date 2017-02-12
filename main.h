@@ -58,6 +58,7 @@ extern VectorXd deltax, vectorV, vectorW, vectorL;
 
 void write_matrix(MatrixXd& matrix, QString path);
 void write_vector(VectorXd& vector, QString path);
+void write_all_matrixes(QString path);
 void matrixB_calc();
 void read_dots();
 void read_link_map();

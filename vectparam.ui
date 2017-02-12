@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>648</width>
-    <height>467</height>
+    <width>231</width>
+    <height>631</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Вектор необходимых параметров</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
