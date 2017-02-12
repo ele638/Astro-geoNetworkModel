@@ -12,6 +12,7 @@
 #include "QString"
 #include "QMessageBox"
 #include "Eigen/Dense"
+#include <Eigen/LU>
 using namespace std;
 using namespace Eigen;
 
@@ -164,17 +165,6 @@ public:
         this->number = index;
     }
 
-    // Деструктор класса
-    ~Start_Point(){
-        z.clear();
-        a.clear();
-        xp.clear();
-        yp.clear();
-        zp.clear();
-        dp.clear();
-        sf.clear();
-        bMatrix.clear();
-    }
 
     void calculate(std::vector<Dot> dots){
         // Проход по всем точкам
@@ -239,7 +229,7 @@ std::vector<Start_Point> start_points_calc, start_points_zagr;
 std::vector<Dot> dots;
 
 MatrixXd matrixB, matrixNormal, deltaX;
-VectorXd deltax, vectorV, vectorW, vectorL;
+VectorXd deltax, vectorV, vectorW, vectorControl;
 
 void write_matrix(MatrixXd& matrix, QString path ){
     QFile file(path);
@@ -267,13 +257,23 @@ void write_vector(VectorXd& vector, QString path ){
         out.setCodec("UTF-8");
         QString temp;
         for(int i=0; i<vector.rows(); i++){
-            temp.append(QString::number(vector(i), 'f', 5) + "\t");
+            temp.append(QString::number(vector(i), 'f', 5) + "\n");
         }
         out << temp;
     }
     file.close();
 }
 
+
+void write_all_matrixes(QString path){
+    write_matrix(matrixB, path+"matrixB.txt");
+    write_matrix(matrixNormal, path+"matrixNormal.txt");
+    write_matrix(deltaX, path+"matrixDeltaX.txt");
+    write_vector(deltax, path+"vectorDeltax.txt");
+    write_vector(vectorV, path+"vectorV.txt");
+    write_vector(vectorW, path+"vectorW.txt");
+    write_vector(vectorControl, path+"vectorControl.txt");
+}
 
 // Генерация матрицы коэффициентов уравнений поправок
 void matrixB_calc(){
@@ -372,12 +372,19 @@ void matrixB_calc(){
     errors.insert(errors.end(), errorsZ.begin(), errorsZ.end());
     errors.insert(errors.end(), errorsS.begin(), errorsS.end());
     matrixNormal = matrixB.transpose()*matrixB;
-    deltaX = matrixNormal.inverse();
+    deltaX.setZero(matrixNormal.rows(), matrixNormal.cols());
+
+    deltaX = (matrixB.transpose()*matrixB).inverse();
+    double det = deltaX.determinant();
     vectorW = VectorXd::Map(errors.data(), errors.size());
     deltax = VectorXd(-deltaX*matrixB.transpose()*vectorW);
     vectorV = VectorXd(matrixB*deltax + vectorW);
     VectorXd temp(vectorV.transpose()*vectorV);
+    vectorControl.resize(deltaX.rows());
     MU = sqrt(temp(0,0)/(pow(CONST_SIZE,2.0)*3 - k*3));
+    for(int i=0; i<deltaX.rows(); i++){
+        vectorControl(i) = deltaX(i,i)*MU;
+    }
 }
 
 

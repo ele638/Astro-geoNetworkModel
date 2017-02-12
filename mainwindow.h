@@ -32,6 +32,8 @@ private slots:
 
     void on_actionVectParam_triggered();
 
+    void on_actionOutAll_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

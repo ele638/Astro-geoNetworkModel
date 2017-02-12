@@ -136,3 +136,8 @@ void MainWindow::on_actionVectParam_triggered()
     VectParam *vp = new VectParam();
     vp->show();
 }
+
+void MainWindow::on_actionOutAll_triggered()
+{
+    write_all_matrixes(QCoreApplication::applicationDirPath());
+}
