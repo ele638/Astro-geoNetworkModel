@@ -301,55 +301,55 @@ void matrixB_calc(){
                    // Если совпал индекс левой связи и не было заполнено раньше
                    if(current_point.number == j && filled1==0){
                        //A
-                       matrixB(k, j*3) = sin(current_point.a.at(i).value)/current_point.dp.at(i)*R;
-                       matrixB(k, (j*3)+1) = -cos(current_point.a.at(i).value)/current_point.dp.at(i)*R;
+                       matrixB(k, j*3) = sin(current_point.a.at(i).to_rad())/current_point.dp.at(i)*R;
+                       matrixB(k, (j*3)+1) = -cos(current_point.a.at(i).to_rad())/current_point.dp.at(i)*R;
                        matrixB(k, (j*3)+2) = 0;
                        //Z
-                       matrixB(zPlace+k, j*3) = cos(current_point.a.at(i).value)*cos(current_point.z.at(i).value)/(-current_point.sf.at(i))*R;
-                       matrixB(zPlace+k, (j*3)+1) = sin(current_point.a.at(i).value)*cos(current_point.z.at(i).value)/(-current_point.sf.at(i))*R;
-                       matrixB(zPlace+k, (j*3)+2) = sin(current_point.z.at(i).value)/current_point.sf.at(i)*R;
+                       matrixB(zPlace+k, j*3) = cos(current_point.a.at(i).to_rad())*cos(current_point.z.at(i).to_rad())/(-current_point.sf.at(i))*R;
+                       matrixB(zPlace+k, (j*3)+1) = sin(current_point.a.at(i).to_rad())*cos(current_point.z.at(i).to_rad())/(-current_point.sf.at(i))*R;
+                       matrixB(zPlace+k, (j*3)+2) = sin(current_point.z.at(i).to_rad())/current_point.sf.at(i)*R;
                        //S
-                       matrixB(sPlace+k, j*3) = -cos(current_point.a.at(i).value)*sin(current_point.z.at(i).value);
-                       matrixB(sPlace+k, (j*3)+1) = -sin(current_point.a.at(i).value)*sin(current_point.z.at(i).value);
-                       matrixB(sPlace+k, (j*3)+2) = -cos(current_point.z.at(i).value);
+                       matrixB(sPlace+k, j*3) = -cos(current_point.a.at(i).to_rad())*sin(current_point.z.at(i).to_rad());
+                       matrixB(sPlace+k, (j*3)+1) = -sin(current_point.a.at(i).to_rad())*sin(current_point.z.at(i).to_rad());
+                       matrixB(sPlace+k, (j*3)+2) = -cos(current_point.z.at(i).to_rad());
 
                        filled1=1;
                    }
                    // Если совпал индекс правой связи
                    if(i == j){
                        //A
-                       matrixB(k, j*3) = (current_point.bMatrix.at(i)(0,0)*sin(current_point.a.at(i).value) -
-                                              current_point.bMatrix.at(i)(1,0)*cos(current_point.a.at(i).value))/
+                       matrixB(k, j*3) = (current_point.bMatrix.at(i)(0,0)*sin(current_point.a.at(i).to_rad()) -
+                                              current_point.bMatrix.at(i)(1,0)*cos(current_point.a.at(i).to_rad()))/
                                               (-current_point.dp.at(i))*R;
-                       matrixB(k, (j*3)+1) = (current_point.bMatrix.at(i)(0,1)*sin(current_point.a.at(i).value) -
-                                                  current_point.bMatrix.at(i)(1,1)*cos(current_point.a.at(i).value))/
+                       matrixB(k, (j*3)+1) = (current_point.bMatrix.at(i)(0,1)*sin(current_point.a.at(i).to_rad()) -
+                                                  current_point.bMatrix.at(i)(1,1)*cos(current_point.a.at(i).to_rad()))/
                                                   (-current_point.dp.at(i))*R;
-                       matrixB(k, (j*3)+2) = (current_point.bMatrix.at(i)(0,2)*sin(current_point.a.at(i).value) -
-                                                  current_point.bMatrix.at(i)(1,2)*cos(current_point.a.at(i).value))/
+                       matrixB(k, (j*3)+2) = (current_point.bMatrix.at(i)(0,2)*sin(current_point.a.at(i).to_rad()) -
+                                                  current_point.bMatrix.at(i)(1,2)*cos(current_point.a.at(i).to_rad()))/
                                                   (-current_point.dp.at(i))*R;
                        //Z
-                       matrixB(zPlace+k, j*3) = (current_point.bMatrix.at(i)(0,0)*cos(current_point.a.at(i).value)*cos(current_point.z.at(i).value) +
-                                                     current_point.bMatrix.at(i)(1,0)*sin(current_point.a.at(i).value)*cos(current_point.z.at(i).value) -
-                                                     current_point.bMatrix.at(i)(2,0)*sin(current_point.z.at(i).value))/
+                       matrixB(zPlace+k, j*3) = (current_point.bMatrix.at(i)(0,0)*cos(current_point.a.at(i).to_rad())*cos(current_point.z.at(i).to_rad()) +
+                                                     current_point.bMatrix.at(i)(1,0)*sin(current_point.a.at(i).to_rad())*cos(current_point.z.at(i).to_rad()) -
+                                                     current_point.bMatrix.at(i)(2,0)*sin(current_point.z.at(i).to_rad()))/
                                                     (current_point.sf.at(i))*R;
-                       matrixB(zPlace+k, (j*3)+1) = (current_point.bMatrix.at(i)(0,1)*cos(current_point.a.at(i).value)*cos(current_point.z.at(i).value) +
-                                                         current_point.bMatrix.at(i)(1,1)*sin(current_point.a.at(i).value)*cos(current_point.z.at(i).value) -
-                                                         current_point.bMatrix.at(i)(2,1)*sin(current_point.z.at(i).value))/
+                       matrixB(zPlace+k, (j*3)+1) = (current_point.bMatrix.at(i)(0,1)*cos(current_point.a.at(i).to_rad())*cos(current_point.z.at(i).to_rad()) +
+                                                         current_point.bMatrix.at(i)(1,1)*sin(current_point.a.at(i).to_rad())*cos(current_point.z.at(i).to_rad()) -
+                                                         current_point.bMatrix.at(i)(2,1)*sin(current_point.z.at(i).to_rad()))/
                                                         (current_point.sf.at(i))*R;
-                       matrixB(zPlace+k, (j*3)+2) = (current_point.bMatrix.at(i)(0,2)*cos(current_point.a.at(i).value)*cos(current_point.z.at(i).value) +
-                                                         current_point.bMatrix.at(i)(1,2)*sin(current_point.a.at(i).value)*cos(current_point.z.at(i).value) -
-                                                         current_point.bMatrix.at(i)(2,2)*sin(current_point.z.at(i).value))/
+                       matrixB(zPlace+k, (j*3)+2) = (current_point.bMatrix.at(i)(0,2)*cos(current_point.a.at(i).to_rad())*cos(current_point.z.at(i).to_rad()) +
+                                                         current_point.bMatrix.at(i)(1,2)*sin(current_point.a.at(i).to_rad())*cos(current_point.z.at(i).to_rad()) -
+                                                         current_point.bMatrix.at(i)(2,2)*sin(current_point.z.at(i).to_rad()))/
                                                         (current_point.sf.at(i))*R;
                        //S
-                       matrixB(sPlace+k, j*3) = (current_point.bMatrix.at(i)(0,0)*cos(current_point.a.at(i).value)*sin(current_point.z.at(i).value) +
-                                                     current_point.bMatrix.at(i)(1,0)*sin(current_point.a.at(i).value)*sin(current_point.z.at(i).value) +
-                                                     current_point.bMatrix.at(i)(2,0)*cos(current_point.z.at(i).value));
-                       matrixB(sPlace+k, (j*3)+1) = (current_point.bMatrix.at(i)(0,1)*cos(current_point.a.at(i).value)*sin(current_point.z.at(i).value) +
-                                                         current_point.bMatrix.at(i)(1,1)*sin(current_point.a.at(i).value)*sin(current_point.z.at(i).value) +
-                                                         current_point.bMatrix.at(i)(2,1)*cos(current_point.z.at(i).value));
-                       matrixB(sPlace+k, (j*3)+2) = (current_point.bMatrix.at(i)(0,2)*cos(current_point.a.at(i).value)*sin(current_point.z.at(i).value) +
-                                                         current_point.bMatrix.at(i)(1,2)*sin(current_point.a.at(i).value)*sin(current_point.z.at(i).value) +
-                                                         current_point.bMatrix.at(i)(2,2)*cos(current_point.z.at(i).value));
+                       matrixB(sPlace+k, j*3) = (current_point.bMatrix.at(i)(0,0)*cos(current_point.a.at(i).to_rad())*sin(current_point.z.at(i).to_rad()) +
+                                                     current_point.bMatrix.at(i)(1,0)*sin(current_point.a.at(i).to_rad())*sin(current_point.z.at(i).to_rad()) +
+                                                     current_point.bMatrix.at(i)(2,0)*cos(current_point.z.at(i).to_rad()));
+                       matrixB(sPlace+k, (j*3)+1) = (current_point.bMatrix.at(i)(0,1)*cos(current_point.a.at(i).to_rad())*sin(current_point.z.at(i).to_rad()) +
+                                                         current_point.bMatrix.at(i)(1,1)*sin(current_point.a.at(i).to_rad())*sin(current_point.z.at(i).to_rad()) +
+                                                         current_point.bMatrix.at(i)(2,1)*cos(current_point.z.at(i).to_rad()));
+                       matrixB(sPlace+k, (j*3)+2) = (current_point.bMatrix.at(i)(0,2)*cos(current_point.a.at(i).to_rad())*sin(current_point.z.at(i).to_rad()) +
+                                                         current_point.bMatrix.at(i)(1,2)*sin(current_point.a.at(i).to_rad())*sin(current_point.z.at(i).to_rad()) +
+                                                         current_point.bMatrix.at(i)(2,2)*cos(current_point.z.at(i).to_rad()));
 
                        filled2=1;
                    }
